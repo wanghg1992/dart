@@ -24,9 +24,10 @@ set(dartpy_test_utils
 )
 
 set(dartpy_test_files
-  unit/utils/test_dart_loader.py
   unit/common/test_uri.py
+  unit/math/test_random.py
   unit/simulation/test_world.py
+  unit/utils/test_dart_loader.py
 )
 
 # Add custom target to run the tests

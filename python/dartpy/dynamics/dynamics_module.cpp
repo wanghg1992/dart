@@ -7,6 +7,9 @@ void dart_dynamics(pybind11::module& m)
 {
   auto sm = m.def_submodule("dynamics");
 
+  void Joint(pybind11::module& sm);
+  Joint(sm);
+
   void Skeleton(pybind11::module& sm);
   Skeleton(sm);
 }

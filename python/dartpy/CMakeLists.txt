@@ -26,7 +26,10 @@ set(dartpy_sources
   dartpy.cpp
   common/common_module.cpp
   common/Uri.cpp
+  math/math_module.cpp
+  math/Random.cpp
   dynamics/dynamics_module.cpp
+  dynamics/Joint.cpp
   dynamics/Skeleton.cpp
   simulation/simulation_module.cpp
   simulation/World.cpp

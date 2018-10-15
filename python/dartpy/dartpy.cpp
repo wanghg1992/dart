@@ -14,6 +14,9 @@ PYBIND11_MODULE(dartpy, m)
   void dart_common(pybind11::module& m);
   dart_common(m);
 
+  void dart_math(pybind11::module& m);
+  dart_math(m);
+
   void dart_dynamics(pybind11::module& m);
   dart_dynamics(m);
 
