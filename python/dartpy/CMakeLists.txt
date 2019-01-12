@@ -2,7 +2,7 @@ if(NOT DARTPY_PYTHON_VERSION)
   set(DARTPY_PYTHON_VERSION 3.4 CACHE STRING "Choose the target Python version (e.g., 3.4, 2.7)" FORCE)
 endif()
 
-find_package(PythonInterp ${DARTPY_PYTHON_VERSION})
+find_package(PythonInterp ${DARTPY_PYTHON_VERSION} QUIET)
 execute_process(COMMAND ${PYTHON_EXECUTABLE} -c
   "from distutils.sysconfig import get_python_lib;\
   print(get_python_lib(plat_specific=True, prefix=''))"
@@ -10,22 +10,28 @@ execute_process(COMMAND ${PYTHON_EXECUTABLE} -c
   OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 if(NOT PythonInterp_FOUND)
-  message(STATUS "Failed to find PythonInterp. Disabling building dartpy")
+  message(STATUS "DART_BUILD_DARTPY is ON, but failed to find PythonInterp. "
+    "Disabling dartpy."
+  )
   return()
 endif()
 
-find_package(PythonLibs ${DARTPY_PYTHON_VERSION} REQUIRED)
+find_package(PythonLibs ${DARTPY_PYTHON_VERSION} QUIET)
 if(NOT PythonLibs_FOUND)
-  message(STATUS "Failed to find PythonLibs. Disabling building dartpy")
+  message(STATUS "DART_BUILD_DARTPY is ON, but failed to find PythonLibs. "
+    "Disabling dartpy."
+  )
   return()
 endif()
 
 # Find pybind11
 # Needs to set PYBIND11_PYTHON_VERSION before finding pybind11
 set(PYBIND11_PYTHON_VERSION ${DARTPY_PYTHON_VERSION})
-find_package(pybind11 2.2.0 REQUIRED)
+find_package(pybind11 2.2.0 QUIET)
 if(NOT pybind11_FOUND)
-  message(STATUS "Failed to find pybind11 >= 2.2.0. Disabling building dartpy")
+  message(STATUS "DART_BUILD_DARTPY is ON, but failed to find pybind11 >= "
+    "2.2.0. Disabling dartpy."
+  )
   return()
 endif()
 
