@@ -87,7 +87,7 @@ jobs:
     OS_NAME: osx
     BUILD_TYPE: Debug
     BUILD_DIR: $(Build.SourcesDirectory)
-    BUILD_DARTPY: OFF
+    BUILD_DARTPY: ON
   steps:
   - script: |
       '.ci/install.sh'
@@ -103,7 +103,7 @@ jobs:
     OS_NAME: osx
     BUILD_TYPE: Release
     BUILD_DIR: $(Build.SourcesDirectory)
-    BUILD_DARTPY: OFF
+    BUILD_DARTPY: ON
   steps:
   - script: |
       '.ci/install.sh'
