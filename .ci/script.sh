@@ -35,23 +35,13 @@ fi
 
 mkdir build && cd build
 
-if [ "$BUILD_NAME" = "BIONIC_DEBUG" ]; then
-  cmake .. \
-    -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
-    -DDART_VERBOSE=ON \
-    -DDART_TREAT_WARNINGS_AS_ERRORS=ON \
-    -DDART_BUILD_DARTPY=$BUILD_DARTPY \
-    -DDART_BUILD_EXTRAS=ON \
-    -DDART_CODECOV=ON
-else
-  cmake .. \
-    -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
-    -DDART_VERBOSE=ON \
-    -DDART_TREAT_WARNINGS_AS_ERRORS=ON \
-    -DDART_BUILD_DARTPY=$BUILD_DARTPY \
-    -DDART_BUILD_EXTRAS=ON \
-    -DDART_CODECOV=OFF
-fi
+cmake .. \
+  -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+  -DDART_VERBOSE=ON \
+  -DDART_TREAT_WARNINGS_AS_ERRORS=ON \
+  -DDART_BUILD_DARTPY=$BUILD_DARTPY \
+  -DDART_BUILD_EXTRAS=ON \
+  -DDART_CODECOV=$CODECOV
 
 if [ "$OS_NAME" = "linux" ]; then
   make -j$num_threads all tutorials examples tests
@@ -89,6 +79,6 @@ if [ "$BUILD_DARTPY" = "ON" ]; then
 fi
 
 # Uploading report to CodeCov
-if [ "$BUILD_NAME" = "BIONIC_DEBUG" ]; then
+if [ "$CODECOV" = "ON" ]; then
   bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 fi

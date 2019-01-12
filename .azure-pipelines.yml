@@ -2,19 +2,6 @@
 # Ref: https://docs.microsoft.com/en-us/azure/devops/pipelines
 
 jobs:
-- job: ubuntu_xenial_gcc_debug
-  pool:
-    vmImage: 'Ubuntu 16.04'
-  variables:
-    OS_NAME: linux
-    COMPILER: gcc
-    BUILD_TYPE: Debug
-    BUILD_DIR: $(Build.SourcesDirectory)
-    SUDO: sudo
-    BUILD_DARTPY: OFF
-  steps:
-  - template: .ci/azure-pipelines/native.yml
-
 - job: ubuntu_xenial_gcc_release
   pool:
     vmImage: 'Ubuntu 16.04'
@@ -25,6 +12,7 @@ jobs:
     BUILD_DIR: $(Build.SourcesDirectory)
     SUDO: sudo
     BUILD_DARTPY: OFF
+    CODECOV: OFF
   steps:
   - template: .ci/azure-pipelines/native.yml
 
@@ -38,6 +26,21 @@ jobs:
     BUILD_DIR: $(Build.SourcesDirectory)
     DOCKERFILE: Dockerfile.ubuntu-xenial-32bit
     BUILD_DARTPY: OFF
+    CODECOV: OFF
+  steps:
+  - template: .ci/azure-pipelines/docker.yml
+
+- job: ubuntu_bionic_gcc_debug
+  pool:
+    vmImage: 'Ubuntu 16.04'
+  variables:
+    OS_NAME: linux
+    COMPILER: gcc
+    BUILD_TYPE: Debug
+    BUILD_DIR: $(Build.SourcesDirectory)
+    DOCKERFILE: Dockerfile.ubuntu-bionic
+    BUILD_DARTPY: OFF
+    CODECOV: ON
   steps:
   - template: .ci/azure-pipelines/docker.yml
 
@@ -51,6 +54,7 @@ jobs:
     BUILD_DIR: $(Build.SourcesDirectory)
     DOCKERFILE: Dockerfile.ubuntu-bionic
     BUILD_DARTPY: OFF
+    CODECOV: OFF
   steps:
   - template: .ci/azure-pipelines/docker.yml
 
@@ -64,6 +68,7 @@ jobs:
     BUILD_DIR: $(Build.SourcesDirectory)
     DOCKERFILE: Dockerfile.ubuntu-cosmic
     BUILD_DARTPY: ON
+    CODECOV: OFF
   steps:
   - template: .ci/azure-pipelines/docker.yml
 
@@ -77,6 +82,7 @@ jobs:
     BUILD_DIR: $(Build.SourcesDirectory)
     DOCKERFILE: Dockerfile.ubuntu-disco
     BUILD_DARTPY: ON
+    CODECOV: OFF
   steps:
   - template: .ci/azure-pipelines/docker.yml
 
@@ -88,6 +94,7 @@ jobs:
     BUILD_TYPE: Debug
     BUILD_DIR: $(Build.SourcesDirectory)
     BUILD_DARTPY: ON
+    CODECOV: OFF
   steps:
   - script: |
       '.ci/install.sh'
@@ -104,6 +111,7 @@ jobs:
     BUILD_TYPE: Release
     BUILD_DIR: $(Build.SourcesDirectory)
     BUILD_DARTPY: ON
+    CODECOV: OFF
   steps:
   - script: |
       '.ci/install.sh'
