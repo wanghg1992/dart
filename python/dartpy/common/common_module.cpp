@@ -3,11 +3,12 @@
 namespace dart {
 namespace python {
 
+void Uri(pybind11::module& sm);
+
 void dart_common(pybind11::module& m)
 {
   auto sm = m.def_submodule("common");
 
-  void Uri(pybind11::module& sm);
   Uri(sm);
 }
 

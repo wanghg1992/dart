@@ -43,7 +43,6 @@ set(dartpy_sources
 #
 pybind11_add_module(dartpy
   MODULE
-  EXCLUDE_FROM_ALL
   ${dartpy_headers}
   ${dartpy_sources}
 )
@@ -74,4 +73,11 @@ install(TARGETS dartpy
   LIBRARY DESTINATION "${PYTHON_SITE_PACKAGES}"
 )
 
+list(REMOVE_ITEM dartpy_headers
+  eigen_geometry_pybind.h
+  eigen_pybind.h
+)
+list(REMOVE_ITEM dartpy_sources
+  eigen_geometry_pybind.cpp
+)
 dart_format_add(${dartpy_headers} ${dartpy_sources})
