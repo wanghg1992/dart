@@ -36,15 +36,31 @@ fi
 mkdir build && cd build
 
 if [ "$BUILD_NAME" = "BIONIC_DEBUG" ]; then
-  cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DDART_VERBOSE=ON -DDART_TREAT_WARNINGS_AS_ERRORS=ON -DDART_BUILD_EXTRAS=ON -DDART_CODECOV=ON ..
+  cmake .. \
+    -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+    -DDART_VERBOSE=ON \
+    -DDART_TREAT_WARNINGS_AS_ERRORS=ON \
+    -BUILD_DARTPY=${BUILD_DARTPY} \
+    -DDART_BUILD_EXTRAS=ON \
+    -DDART_CODECOV=ON
 else
-  cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DDART_VERBOSE=ON -DDART_TREAT_WARNINGS_AS_ERRORS=ON -DDART_BUILD_EXTRAS=ON -DDART_CODECOV=OFF ..
+  cmake .. \
+    -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+    -DDART_VERBOSE=ON \
+    -DDART_TREAT_WARNINGS_AS_ERRORS=ON \
+    -BUILD_DARTPY=${BUILD_DARTPY} \
+    -DDART_BUILD_EXTRAS=ON \
+    -DDART_CODECOV=OFF
 fi
 
 if [ "$OS_NAME" = "linux" ]; then
   make -j$num_threads all tutorials examples tests
 else
   make -j$num_threads all tests
+fi
+
+if [ "$BUILD_DARTPY" = "ON" ]; then
+  make pytest
 fi
 
 if [ "$OS_NAME" = "linux" ] && [ $(lsb_release -sc) = "bionic" ]; then

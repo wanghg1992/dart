@@ -11,6 +11,7 @@ jobs:
     BUILD_TYPE: Debug
     BUILD_DIR: $(Build.SourcesDirectory)
     SUDO: sudo
+    BUILD_DARTPY: OFF
   steps:
   - template: .ci/azure-pipelines/native.yml
 
@@ -23,6 +24,7 @@ jobs:
     BUILD_TYPE: Release
     BUILD_DIR: $(Build.SourcesDirectory)
     SUDO: sudo
+    BUILD_DARTPY: OFF
   steps:
   - template: .ci/azure-pipelines/native.yml
 
@@ -35,6 +37,7 @@ jobs:
     BUILD_TYPE: Release
     BUILD_DIR: $(Build.SourcesDirectory)
     DOCKERFILE: Dockerfile.ubuntu-xenial-32bit
+    BUILD_DARTPY: OFF
   steps:
   - template: .ci/azure-pipelines/docker.yml
 
@@ -47,6 +50,7 @@ jobs:
     BUILD_TYPE: Release
     BUILD_DIR: $(Build.SourcesDirectory)
     DOCKERFILE: Dockerfile.ubuntu-bionic
+    BUILD_DARTPY: OFF
   steps:
   - template: .ci/azure-pipelines/docker.yml
 
@@ -59,6 +63,7 @@ jobs:
     BUILD_TYPE: Release
     BUILD_DIR: $(Build.SourcesDirectory)
     DOCKERFILE: Dockerfile.ubuntu-cosmic
+    BUILD_DARTPY: ON
   steps:
   - template: .ci/azure-pipelines/docker.yml
 
@@ -71,6 +76,7 @@ jobs:
     BUILD_TYPE: Release
     BUILD_DIR: $(Build.SourcesDirectory)
     DOCKERFILE: Dockerfile.ubuntu-disco
+    BUILD_DARTPY: ON
   steps:
   - template: .ci/azure-pipelines/docker.yml
 
@@ -81,6 +87,7 @@ jobs:
     OS_NAME: osx
     BUILD_TYPE: Debug
     BUILD_DIR: $(Build.SourcesDirectory)
+    BUILD_DARTPY: OFF
   steps:
   - script: |
       '.ci/install.sh'
@@ -96,6 +103,7 @@ jobs:
     OS_NAME: osx
     BUILD_TYPE: Release
     BUILD_DIR: $(Build.SourcesDirectory)
+    BUILD_DARTPY: OFF
   steps:
   - script: |
       '.ci/install.sh'

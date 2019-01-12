@@ -50,9 +50,11 @@ elif [ $(lsb_release -sc) = "bionic" ]; then
 elif [ $(lsb_release -sc) = "cosmic" ]; then
   $SUDO apt-get -y install libnlopt-cxx-dev
   $SUDO apt-get -y install liboctomap-dev libode-dev
+  $SUDO apt-get -y install pybind11-dev libpython3-dev python-pytest-dev
 elif [ $(lsb_release -sc) = "disco" ]; then
   $SUDO apt-get -y install libnlopt-cxx-dev
   $SUDO apt-get -y install liboctomap-dev libode-dev
+  $SUDO apt-get -y install pybind11-dev libpython3-dev python-pytest-dev
 else
   echo -e "$(lsb_release -sc) is not supported."
   exit 1
