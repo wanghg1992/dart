@@ -53,6 +53,10 @@ set(dartpy_sources
   simulation/World.cpp
   utils/utils_module.cpp
   utils/DartLoader.cpp
+  utils/SkelParser.cpp
+  gui/gui_module.cpp
+  gui/glut/glut_module.cpp
+  gui/glut/SimWindow.cpp
 )
 
 # Build a Python extension module:
@@ -74,11 +78,14 @@ target_include_directories(dartpy
 target_link_libraries(dartpy
   PUBLIC
     dart
-    dart-collision-bullet
     dart-utils
     dart-utils-urdf
+    dart-gui
     ${PYTHON_LIBRARIES}
 )
+if(TARGET dart-collision-bullet)
+  target_link_libraries(dartpy PUBLIC dart-collision-bullet)
+endif()
 
 set_target_properties(dartpy
   PROPERTIES
