@@ -39,7 +39,7 @@ jobs:
     BUILD_TYPE: Debug
     BUILD_DIR: $(Build.SourcesDirectory)
     DOCKERFILE: Dockerfile.ubuntu-bionic
-    BUILD_DARTPY: OFF
+    BUILD_DARTPY: ON
     CODECOV: ON
   steps:
   - template: .ci/azure-pipelines/docker.yml
@@ -53,7 +53,7 @@ jobs:
     BUILD_TYPE: Release
     BUILD_DIR: $(Build.SourcesDirectory)
     DOCKERFILE: Dockerfile.ubuntu-bionic
-    BUILD_DARTPY: OFF
+    BUILD_DARTPY: ON
     CODECOV: OFF
   steps:
   - template: .ci/azure-pipelines/docker.yml

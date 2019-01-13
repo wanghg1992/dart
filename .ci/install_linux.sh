@@ -47,6 +47,15 @@ elif [ $(lsb_release -sc) = "bionic" ]; then
   $SUDO apt-get -y install libnlopt-dev
   $SUDO apt-get -y install liboctomap-dev libode-dev
   $SUDO apt-get -y install clang-format-6.0
+  git clone https://github.com/pybind/pybind11
+  git checkout v2.2.3
+  cd pybind11
+  mkdir build
+  cd build
+  cmake .. -DCMAKE_BUILD_TYPE=Release
+  make -j4
+  $SUDO make install
+  cd ../..
 elif [ $(lsb_release -sc) = "cosmic" ]; then
   $SUDO apt-get -y install libnlopt-cxx-dev
   $SUDO apt-get -y install liboctomap-dev libode-dev
