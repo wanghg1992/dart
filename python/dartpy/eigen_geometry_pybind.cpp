@@ -43,8 +43,8 @@
 
 using std::fabs;
 
-//namespace dart {
-//namespace python {
+namespace dart {
+namespace python {
 namespace {
 
 // TODO(eric.cousineau): There is validation from Python to C++, but no
@@ -114,7 +114,7 @@ void CheckAngleAxis(const Eigen::AngleAxis<T>& value) {
 }  // namespace
 
 // PYBIND11_MODULE(eigen_geometry, m) {
-void eigen(pybind11::module& parent_m)
+void eigen_geometry(pybind11::module& parent_m)
 {
   auto m = parent_m.def_submodule("math");
 
@@ -373,5 +373,5 @@ void eigen(pybind11::module& parent_m)
   }
 }
 
-//} // namespace python
-//} // namespace dart
+} // namespace python
+} // namespace dart

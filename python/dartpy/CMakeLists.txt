@@ -43,12 +43,16 @@ set(dartpy_sources
   eigen_geometry_pybind.cpp
   dartpy.cpp
   common/common_module.cpp
+  common/Subject.cpp
   common/Uri.cpp
   math/math_module.cpp
   math/Random.cpp
   dynamics/dynamics_module.cpp
+  dynamics/Frame.cpp
+  dynamics/BodyNode.cpp
   dynamics/Joint.cpp
   dynamics/Skeleton.cpp
+  dynamics/MetaSkeleton.cpp
   simulation/simulation_module.cpp
   simulation/World.cpp
   utils/utils_module.cpp
@@ -73,6 +77,8 @@ target_include_directories(dartpy
   SYSTEM PUBLIC
     ${PYTHON_INCLUDE_DIRS}
     ${pybind11_INCLUDE_DIRS}
+  PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(dartpy
@@ -98,11 +104,11 @@ install(TARGETS dartpy
   LIBRARY DESTINATION "${PYTHON_SITE_PACKAGES}"
 )
 
-list(REMOVE_ITEM dartpy_headers
-  eigen_geometry_pybind.h
-  eigen_pybind.h
-)
-list(REMOVE_ITEM dartpy_sources
-  eigen_geometry_pybind.cpp
-)
+#list(REMOVE_ITEM dartpy_headers
+#  eigen_geometry_pybind.h
+#  eigen_pybind.h
+#)
+#list(REMOVE_ITEM dartpy_sources
+#  eigen_geometry_pybind.cpp
+#)
 dart_format_add(${dartpy_headers} ${dartpy_sources})

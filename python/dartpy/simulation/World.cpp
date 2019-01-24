@@ -13,7 +13,7 @@ void World(pybind11::module& m)
       dart::simulation::World,
       std::shared_ptr<dart::simulation::World>>(m, "World")
       .def(::pybind11::init<>())
-      .def(::pybind11::init<const std::string&>(), ::pybind11::arg("_name"))
+      .def(::pybind11::init<const std::string&>(), ::pybind11::arg("name"))
       .def(
           "clone",
           +[](const dart::simulation::World* self)
@@ -25,7 +25,7 @@ void World(pybind11::module& m)
           +[](dart::simulation::World* self, const std::string& _newName)
               -> const std::string& { return self->setName(_newName); },
           ::pybind11::return_value_policy::reference_internal,
-          ::pybind11::arg("_newName"))
+          ::pybind11::arg("newName"))
       .def(
           "getName",
           +[](const dart::simulation::World* self) -> const std::string& {
@@ -36,7 +36,7 @@ void World(pybind11::module& m)
           "setGravity",
           +[](dart::simulation::World* self, const Eigen::Vector3d& _gravity)
               -> void { return self->setGravity(_gravity); },
-          ::pybind11::arg("_gravity"))
+          ::pybind11::arg("gravity"))
       .def(
           "getGravity",
           +[](const dart::simulation::World* self) -> const Eigen::Vector3d& {
@@ -48,7 +48,7 @@ void World(pybind11::module& m)
           +[](dart::simulation::World* self, double _timeStep) -> void {
             return self->setTimeStep(_timeStep);
           },
-          ::pybind11::arg("_timeStep"))
+          ::pybind11::arg("timeStep"))
       .def(
           "getTimeStep",
           +[](const dart::simulation::World* self) -> double {
@@ -60,14 +60,14 @@ void World(pybind11::module& m)
               std::size_t _index) -> dart::dynamics::SkeletonPtr {
             return self->getSkeleton(_index);
           },
-          ::pybind11::arg("_index"))
+          ::pybind11::arg("index"))
       .def(
           "getSkeleton",
           +[](const dart::simulation::World* self,
               const std::string& _name) -> dart::dynamics::SkeletonPtr {
             return self->getSkeleton(_name);
           },
-          ::pybind11::arg("_name"))
+          ::pybind11::arg("name"))
       .def(
           "getNumSkeletons",
           +[](const dart::simulation::World* self) -> std::size_t {
@@ -79,14 +79,14 @@ void World(pybind11::module& m)
               const dart::dynamics::SkeletonPtr& _skeleton) -> std::string {
             return self->addSkeleton(_skeleton);
           },
-          ::pybind11::arg("_skeleton"))
+          ::pybind11::arg("skeleton"))
       .def(
           "removeSkeleton",
           +[](dart::simulation::World* self,
               const dart::dynamics::SkeletonPtr& _skeleton) -> void {
             return self->removeSkeleton(_skeleton);
           },
-          ::pybind11::arg("_skeleton"))
+          ::pybind11::arg("skeleton"))
       .def(
           "removeAllSkeletons",
           +[](dart::simulation::World* self)
@@ -105,21 +105,21 @@ void World(pybind11::module& m)
           +[](const dart::simulation::World* self, int _index) -> int {
             return self->getIndex(_index);
           },
-          ::pybind11::arg("_index"))
+          ::pybind11::arg("index"))
       .def(
           "getSimpleFrame",
           +[](const dart::simulation::World* self,
               std::size_t _index) -> dart::dynamics::SimpleFramePtr {
             return self->getSimpleFrame(_index);
           },
-          ::pybind11::arg("_index"))
+          ::pybind11::arg("index"))
       .def(
           "getSimpleFrame",
           +[](const dart::simulation::World* self,
               const std::string& _name) -> dart::dynamics::SimpleFramePtr {
             return self->getSimpleFrame(_name);
           },
-          ::pybind11::arg("_name"))
+          ::pybind11::arg("name"))
       .def(
           "getNumSimpleFrames",
           +[](const dart::simulation::World* self) -> std::size_t {
@@ -131,14 +131,14 @@ void World(pybind11::module& m)
               const dart::dynamics::SimpleFramePtr& _frame) -> std::string {
             return self->addSimpleFrame(_frame);
           },
-          ::pybind11::arg("_frame"))
+          ::pybind11::arg("frame"))
       .def(
           "removeSimpleFrame",
           +[](dart::simulation::World* self,
               const dart::dynamics::SimpleFramePtr& _frame) -> void {
             return self->removeSimpleFrame(_frame);
           },
-          ::pybind11::arg("_frame"))
+          ::pybind11::arg("frame"))
       .def(
           "removeAllSimpleFrames",
           +[](dart::simulation::World* self)
@@ -177,13 +177,13 @@ void World(pybind11::module& m)
           +[](dart::simulation::World* self, bool _resetCommand) -> void {
             return self->step(_resetCommand);
           },
-          ::pybind11::arg("_resetCommand"))
+          ::pybind11::arg("resetCommand"))
       .def(
           "setTime",
           +[](dart::simulation::World* self, double _time) -> void {
             return self->setTime(_time);
           },
-          ::pybind11::arg("_time"))
+          ::pybind11::arg("time"))
       .def(
           "getTime",
           +[](const dart::simulation::World* self) -> double {
