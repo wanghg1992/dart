@@ -37,6 +37,8 @@ dart_format_add(
 
 dart_format_add(
   HeightmapShape.hpp
+  PointCloudShape.hpp
+  PointCloudShape.cpp
   VoxelGridShape.hpp
   VoxelGridShape.cpp
   SmartPointer.hpp

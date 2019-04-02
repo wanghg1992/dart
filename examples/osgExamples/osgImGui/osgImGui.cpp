@@ -273,13 +273,17 @@ int main()
   // Create a world
   dart::simulation::WorldPtr world(new dart::simulation::World);
 
-  // Add a target object to the world
-  dart::gui::osg::InteractiveFramePtr target(
-      new dart::gui::osg::InteractiveFrame(dart::dynamics::Frame::World()));
-  world->addSimpleFrame(target);
 
   // Wrap a WorldNode around it
   osg::ref_ptr<CustomWorldNode> node = new CustomWorldNode(world);
+
+  auto F1 = std::make_shared<dart::dynamics::SimpleFrame>(dart::dynamics::Frame::World(), "F1");
+  auto pointCloud = std::make_shared<dart::dynamics::PointCloudShape>();
+  for (auto i = 0u; i < 1000; ++i)
+    pointCloud->addPoint(Eigen::Vector3d::Random());
+  F1->setShape(pointCloud);
+  F1->createVisualAspect();
+  world->addSimpleFrame(F1);
 
   // Create a Viewer and set it up with the WorldNode
   dart::gui::osg::ImGuiViewer viewer;
@@ -288,9 +292,6 @@ int main()
   // Add control widget for atlas
   viewer.getImGuiHandler()->addWidget(
       std::make_shared<TestWidget>(&viewer, world));
-
-  // Active the drag-and-drop feature for the target
-  viewer.enableDragAndDrop(target.get());
 
   // Pass in the custom event handler
   viewer.addEventHandler(new CustomEventHandler);

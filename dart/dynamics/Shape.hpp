@@ -70,6 +70,7 @@ public:
     SOFT_MESH,
     LINE_SEGMENT,
     HEIGHTMAP,
+    POINT_CLOUD,
     UNSUPPORTED
   };
 

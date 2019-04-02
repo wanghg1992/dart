@@ -68,6 +68,8 @@ octomap::pose6d toPose6d(const Eigen::Isometry3d& frame)
 VoxelGridShape::VoxelGridShape(double resolution) : Shape()
 {
   setOctree(fcl_make_shared<octomap::OcTree>(resolution));
+
+  mVariance = DYNAMIC_ELEMENTS;
 }
 
 //==============================================================================
@@ -82,6 +84,8 @@ VoxelGridShape::VoxelGridShape(fcl_shared_ptr<octomap::OcTree> octree) : Shape()
   }
 
   setOctree(std::move(octree));
+
+  mVariance = DYNAMIC_ELEMENTS;
 }
 
 //==============================================================================
