@@ -38,6 +38,12 @@ namespace dart {
 namespace examples {
 
 //==============================================================================
+Project::~Project()
+{
+  std::cout << "I'm dying!" << std::endl;
+}
+
+//==============================================================================
 void Project::initialize()
 {
   // Do nothing

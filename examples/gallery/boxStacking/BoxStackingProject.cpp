@@ -142,6 +142,7 @@ void BoxStackingProject::prestep()
 void BoxStackingProject::finalize()
 {
   // Do nothing
+  std::cout << "[DEBUG] BoxStackingProject::finalize()" << std::endl;
 }
 
 //==============================================================================

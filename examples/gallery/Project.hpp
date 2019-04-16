@@ -47,7 +47,7 @@ class Project
 {
 public:
   Project() = default;
-  virtual ~Project() = default;
+  virtual ~Project();
 
   virtual void initialize();
   virtual void reset();

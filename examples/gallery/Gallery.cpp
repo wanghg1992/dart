@@ -89,20 +89,33 @@ void Gallery::run()
 //==============================================================================
 void Gallery::selectProject(const ProjectNode* node)
 {
+  bool simulating = viewer.isSimulating();
   if (mCurrentProject)
   {
+    std::cout << "[DEBUG] 1" << std::endl;
+    if (simulating)
+      viewer.simulate(false);
+    std::cout << "[DEBUG] 2" << std::endl;
     mCurrentProject->finalize();
-    viewer.removeWorldNode(mCurrentProject->getOsgNode());
+    std::cout << "[DEBUG] 3" << std::endl;
+//    viewer.removeWorldNode(mCurrentProject->getOsgNode());
+    viewer.setWorldNodeActive(mCurrentProject->getOsgNode(), false);
+    std::cout << "[DEBUG] 4" << std::endl;
     mCurrentProject = nullptr;
   }
+  viewer.realize();
+  //viewer.setDone(true);
 
+  std::cout << "[DEBUG] 5" << std::endl;
   if (!node)
     return;
 
+  std::cout << "[DEBUG] 6" << std::endl;
   auto createFunction = node->getCreateFunction();
   if (!createFunction)
     return;
 
+  std::cout << "[DEBUG] 7" << std::endl;
   mCurrentProject = createFunction();
 
   if (!mCurrentProject)
@@ -111,8 +124,10 @@ void Gallery::selectProject(const ProjectNode* node)
     return;
   }
 
+  std::cout << "[DEBUG] 8" << std::endl;
   mCurrentProject->initialize();
 
+  std::cout << "[DEBUG] 9" << std::endl;
   auto osgNode = mCurrentProject->getOsgNode();
   if (!osgNode)
   {
@@ -121,11 +136,15 @@ void Gallery::selectProject(const ProjectNode* node)
     return;
   }
 
+  std::cout << "[DEBUG] 10" << std::endl;
   viewer.addWorldNode(osgNode);
 
+  std::cout << "[DEBUG] 11" << std::endl;
   std::stringstream ss;
   ss << "Project '" << mCurrentProject->getName() << "' is loaded.\n";
   mOutputWidget->addLog(ss.str());
+
+  std::cout << "[DEBUG] 11" << std::endl;
 }
 
 //==============================================================================

@@ -74,6 +74,8 @@ void RigidCubesProject::prestep()
 void RigidCubesProject::finalize()
 {
   // Do nothing
+  setWorld(nullptr);
+  std::cout << "[DEBUG] RigidCubesProject::finalize()" << std::endl;
 }
 
 //==============================================================================
